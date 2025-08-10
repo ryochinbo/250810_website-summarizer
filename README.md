@@ -1,5 +1,7 @@
 # AIウェブサイト要約アプリ
+
 ![alt text](image/image.png)
+
 これは、GoogleのGemini APIを使ってウェブサイトの内容を要約するStreamlitアプリケーションです。  
 要約したいサイトをcsvのリストにして、まとめて処理も行えます。
 
