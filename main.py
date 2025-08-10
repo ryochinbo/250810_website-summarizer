@@ -63,7 +63,7 @@ def generate_title_with_gemini(api_key, summary_text):
     try:
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')  # モデル名は適宜変更
-        prompt = f"以下の要約に最適な短いタイトルを生成してください。:\n\n{summary_text}"
+        prompt = f"以下の要約に最適な短いタイトルを生成してください。一つだけファイル名になるものを考え、それのみを出力してください:\n\n{summary_text}"
         response = model.generate_content(prompt)
         return response.text.strip().replace('"', '')  # タイトルを整形
     except Exception as e:
