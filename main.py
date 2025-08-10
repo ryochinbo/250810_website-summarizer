@@ -189,7 +189,7 @@ elif mode == "CSVファイルをアップロード":
                         st.subheader("処理結果")
                         st.dataframe(df_urls)
 
-                        csv_output = df_urls.to_csv(index=False).encode('utf-8')
+                        csv_output = df_urls.to_csv(index=False).encode('cp932')
                         st.download_button(
                             label="結果をCSVとしてダウンロード",
                             data=csv_output,
