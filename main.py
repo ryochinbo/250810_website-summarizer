@@ -58,6 +58,18 @@ def summarize_with_gemini(api_key, system_prompt, text_content):
         st.error(f"Gemini APIの呼び出し中にエラーが発生しました: {e}")
         return None
 
+def generate_title_with_gemini(api_key, summary_text):
+    """Gemini APIを使用して要約からタイトルを生成する"""
+    try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-1.5-flash')  # モデル名は適宜変更
+        prompt = f"以下の要約に最適な短いタイトルを生成してください。:\n\n{summary_text}"
+        response = model.generate_content(prompt)
+        return response.text.strip().replace('"', '')  # タイトルを整形
+    except Exception as e:
+        st.error(f"Gemini APIでのタイトル生成中にエラーが発生しました: {e}")
+        return "無題"
+
 # --- Streamlit UI ---
 
 st.set_page_config(page_title="Website Summarizer", layout="wide")
@@ -128,11 +140,15 @@ if mode == "URLを手入力":
 
                 st.subheader("要約結果")
                 if summary:
-                    st.markdown(summary)
+                    with st.spinner("Geminiがタイトルを生成中..."):
+                        title = generate_title_with_gemini(api_key, summary)
+                    st.subheader("要約結果")
+                    st.markdown(f"# {title}\n\n{summary}")
+
                     st.download_button(
                         label="マークダウンとしてダウンロード",
-                        data=summary,
-                        file_name=f"{url_input.replace('/', '_')}_summary.md",
+                        data=f"# {title}\n\n{summary}",
+                        file_name=f"{title}.md",
                         mime="text/markdown",
                     )
                 else:
