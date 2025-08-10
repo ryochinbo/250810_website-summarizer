@@ -91,7 +91,7 @@ with st.sidebar:
     with st.expander("新規プロンプト保存"):
         uploaded_prompt_file = st.file_uploader("プロンプトファイル (.txt)", type="txt")
         new_prompt_title = st.text_input("このプロンプトのタイトル")
-        if st.button("アップロードしたプロンプトを保存"):
+        if st.button("アップロード"):
             if uploaded_prompt_file is not None and new_prompt_title:
                 prompt_content = StringIO(uploaded_prompt_file.getvalue().decode("utf-8")).read()
                 prompts_df = save_prompt(new_prompt_title, prompt_content, prompts_df)
