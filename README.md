@@ -28,7 +28,7 @@ Gitというツールを使って、プロジェクトのファイルをダウ�
 
 ```bash
 # プロジェクトのファイルをPCにコピーします
-git clone https://github.com/ryochinbo/website-summarizer.git
+git clone https://github.com/ryochinbo/250810_website-summarizer.git
 
 # コピーしたプロジェクトのフォルダに移動します
 cd website-summarizer
